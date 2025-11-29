@@ -52,5 +52,5 @@ fn grab_index() -> u32 {
         };
     };
 
-    return desired_index;
+    desired_index
 }
