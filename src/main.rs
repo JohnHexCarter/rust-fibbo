@@ -27,20 +27,30 @@ fn main() {
 }
 
 fn grab_index() -> u32 {
-    let mut desired_index = String::new();
-    
-    // This currently becomes an infinite loop
-    // if the initial iteration fails
-    loop {
+    let desired_index: u32 = loop {
         println!("Please enter an integer (max of 40)");
 
+        let mut user_input = String::new();
+
         io::stdin()
-            .read_line(&mut desired_index)
+            .read_line(&mut user_input)
             .expect("Failed to read line");
 
-        match desired_index.trim().parse() {
-            Ok(num) => break num,
-            Err(_) => continue,
+        let user_input: u32 = match user_input.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("not a number");
+                continue
+            },
         };
-    }
+
+        if user_input > 40 {
+          println!("too big");
+          continue;
+        } else {
+          break user_input;
+        };
+    };
+
+    return desired_index;
 }
